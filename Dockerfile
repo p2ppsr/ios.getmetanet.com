@@ -1,6 +1,7 @@
 FROM nginx:alpine
 
 COPY frontend/ /usr/share/nginx/html
+COPY assets/ /usr/share/nginx/html/assets
 
 # Serve on 8080 and ensure Universal Links AASA files are returned as JSON.
 RUN cat > /etc/nginx/conf.d/default.conf <<'EOF'
