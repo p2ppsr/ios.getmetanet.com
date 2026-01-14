@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      context: .
+    image: ios-getmetanet-web:local
+    environment:
+      TEAM_ID: "${TEAM_ID}"
+    ports:
+      - "8080:8080"
