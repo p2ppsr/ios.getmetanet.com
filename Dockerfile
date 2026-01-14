@@ -29,4 +29,4 @@ server {
 }
 EOF
 
-CMD ["/bin/sh", "-c", "test -n \"$TEAM_ID\" || (echo 'Missing TEAM_ID' >&2; exit 1); sed -i \"s/__TEAM_ID__/$TEAM_ID/g\" /usr/share/nginx/html/.well-known/apple-app-site-association /usr/share/nginx/html/apple-app-site-association; if [ -n \"${APP_STORE_APP_ID:-}\" ]; then sed -i \"s/__APP_STORE_APP_ID__/$APP_STORE_APP_ID/g\" /usr/share/nginx/html/index.html /usr/share/nginx/html/open/index.html; fi; exec nginx -g 'daemon off;'" ]
+CMD ["/bin/sh", "-c", "exec nginx -g 'daemon off;'" ]

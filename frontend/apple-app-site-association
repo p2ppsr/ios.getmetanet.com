@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "__TEAM_ID__.app.metanet.explorer",
+        "appID": "3YQ69SSGVS.app.metanet.explorer",
         "paths": [
           "/open",
           "/open/*"
