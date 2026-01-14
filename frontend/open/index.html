@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-itunes-app" content="app-id=__APP_STORE_APP_ID__" />
+  <meta name="apple-itunes-app" content="app-id=6752445658, app-argument=metanet://browser" />
   <title>Open in Metanet Explorer</title>
   <style>
     :root {
@@ -22,8 +22,27 @@
     .container {
       max-width: 760px;
       margin: 0 auto;
-      padding: 3.5rem 1.5rem 4rem;
+      padding: 3.25rem 1.5rem 4rem;
       text-align: center;
+    }
+
+    .app-mark {
+      margin: 0 auto 1.25rem;
+      width: 84px;
+      height: 84px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(30, 64, 175, 0.45), rgba(37, 99, 235, 0.18));
+      box-shadow: 0 22px 60px rgba(37, 99, 235, 0.22);
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      backdrop-filter: blur(12px);
+    }
+
+    .app-mark svg {
+      width: 56px;
+      height: 56px;
+      display: block;
     }
 
     .badge {
@@ -98,11 +117,46 @@
       font-family: ui-monospace, SFMono-Regular, SFMono, Menlo, Monaco, Consolas, "Liberation Mono",
         "Courier New", monospace;
     }
+
+    @media (max-width: 680px) {
+      .container {
+        padding: 2.5rem 1.25rem 3.25rem;
+      }
+
+      .app-mark {
+        width: 72px;
+        height: 72px;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+      }
+
+      .app-mark svg {
+        width: 48px;
+        height: 48px;
+      }
+    }
   </style>
 </head>
 
 <body>
   <main class="container">
+    <div class="app-mark" aria-hidden="true">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12.5 48.5L32 15.5L51.5 48.5H12.5Z"
+          stroke="#c7d2fe"
+          stroke-width="4"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M32 27L24.5 40.5M32 27L39.5 40.5M24.5 40.5H39.5"
+          stroke="#c7d2fe"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-dasharray="6 6"
+        />
+      </svg>
+    </div>
     <span class="badge"><strong>Metanet Explorer</strong></span>
     <h1>Open in Metanet Explorer</h1>
     <p id="subtitle">
