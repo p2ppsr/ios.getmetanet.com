@@ -61,7 +61,6 @@ metadata:
   namespace: ios-getmetanet
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    cert-manager.io/cluster-issuer: letsencrypt-nginx
 spec:
   ingressClassName: nginx
   rules:
