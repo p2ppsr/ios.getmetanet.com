@@ -1,33 +1,38 @@
 FROM nginx:alpine
 
-COPY frontend/ /usr/share/nginx/html
-COPY assets/ /usr/share/nginx/html/assets
+# Copy your static site
+COPY frontend/ /usr/share/nginx/html/
+COPY assets/ /usr/share/nginx/html/assets/
 
-# Serve on 8080 and ensure Universal Links AASA files are returned as JSON.
+# Nginx config
 RUN cat > /etc/nginx/conf.d/default.conf <<'EOF'
 server {
   listen 8080;
   server_name _;
-
   root /usr/share/nginx/html;
   index index.html;
 
-  location = /.well-known/apple-app-site-association {
-    default_type application/json;
-    add_header Content-Type application/json;
-    try_files /.well-known/apple-app-site-association =404;
-  }
-
+  # Serve AASA in both common locations (no redirects)
   location = /apple-app-site-association {
     default_type application/json;
-    add_header Content-Type application/json;
     try_files /apple-app-site-association =404;
   }
 
+  location = /.well-known/apple-app-site-association {
+    default_type application/json;
+    try_files /apple-app-site-association =404;
+  }
+
+  # Your /open/ page
+  location /open/ {
+    try_files $uri $uri/ /open/index.html;
+  }
+
+  # If this is NOT an SPA, you may want strict files:
   location / {
-    try_files $uri $uri/ /index.html;
+    try_files $uri $uri/ =404;
   }
 }
 EOF
 
-CMD ["/bin/sh", "-c", "exec nginx -g 'daemon off;'" ]
+EXPOSE 8080
