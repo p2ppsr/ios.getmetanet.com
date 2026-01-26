@@ -94,3 +94,26 @@ spec:
 YAML
 
 microk8s kubectl apply -f ios-getmetanet.yaml
+
+
+
+when doing ingress and cert update:
+delete the current ingress and cert before update
+
+# delete the failing/pending attempt (tls-2) objects by name (safe)
+k -n "$NS" delete challenge ios-getmetanet-tls-2-2622432990-1526156387 --ignore-not-found
+k -n "$NS" delete order ios-getmetanet-tls-2-2622432990 --ignore-not-found
+k -n "$NS" delete certificaterequest ios-getmetanet-tls-2 --ignore-not-found
+
+# (optional but often helps) kick the Certificate to re-issue
+k -n "$NS" delete certificate ios-getmetanet-tls --ignore-not-found
+k -n "$NS" delete secret ios-getmetanet-tls --ignore-not-found
+
+
+
+cert checker: 
+
+k -n "$NS" get certificate,certificaterequest,order,challenge
+
+
+IMPORTANT!!!!!!!!!!!!!! SIDE NOTE MAKE SURE THERES ONLY 1 INGRESS PER DOMAIN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
