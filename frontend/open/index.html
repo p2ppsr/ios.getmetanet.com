@@ -156,10 +156,10 @@
     <span class="badge"><strong>Metanet Explorer</strong></span>
     <h1>Open in Metanet Explorer</h1>
     <p id="subtitle">
-      If Metanet Explorer is installed, it should open automatically. If it didn’t, tap the button below.
+      Handoffs now continue through GetMetanet.
     </p>
 
-    <a id="open-cta" class="cta primary" href="/" hidden>Open Metanet Explorer</a>
+    <a id="open-cta" class="cta primary" href="/" hidden>Continue on GetMetanet</a>
 
     <p class="meta" id="details" hidden></p>
     <p class="meta">
@@ -191,14 +191,14 @@
         host = new URL(target).hostname.replace(/^www\./, '');
       } catch {}
 
-      const schemeUrl = 'metanet://browser?url=' + encodeURIComponent(target);
+      const handoffUrl = 'https://getmetanet.com/open?url=' + encodeURIComponent(target);
 
       if (subtitle) {
-        subtitle.textContent = `Ready to open ${host} in Metanet Explorer.`;
+        subtitle.textContent = `Ready to continue to ${host} through GetMetanet.`;
       }
 
       if (openCta) {
-        openCta.href = schemeUrl;
+        openCta.href = handoffUrl;
         openCta.target = '_self';
         openCta.hidden = false;
       }

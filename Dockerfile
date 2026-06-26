@@ -12,7 +12,8 @@ server {
   root /usr/share/nginx/html;
   index index.html;
 
-  # Serve AASA in both common locations (no redirects)
+  # Serve an empty AASA in both common locations. Metanet Explorer must not
+  # claim Universal Links while applying for Apple's browser entitlement.
   location = /apple-app-site-association {
     default_type application/json;
     try_files /apple-app-site-association =404;
@@ -23,14 +24,22 @@ server {
     try_files /apple-app-site-association =404;
   }
 
-  # Your /open/ page
-  location /open/ {
-    try_files $uri $uri/ /open/index.html;
+  # Legacy handoff URLs now belong to the GetMetanet web router. Preserve the
+  # query string so existing third-party links continue to work.
+  location = /open {
+    return 302 https://getmetanet.com/open$is_args$args;
   }
 
-  # If this is NOT an SPA, you may want strict files:
+  location /open/ {
+    return 302 https://getmetanet.com/open$is_args$args;
+  }
+
+  location = / {
+    return 302 https://getmetanet.com/downloads;
+  }
+
   location / {
-    try_files $uri $uri/ =404;
+    return 302 https://getmetanet.com$request_uri;
   }
 }
 EOF

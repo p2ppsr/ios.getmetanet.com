@@ -1,15 +1,6 @@
 {
   "applinks": {
     "apps": [],
-    "details": [
-      {
-        "appID": "3YQ69SSGVS.app.metanet.explorer",
-        "paths": [
-          "/open",
-          "/open/",
-          "/open/*"
-        ]
-      }
-    ]
+    "details": []
   }
 }

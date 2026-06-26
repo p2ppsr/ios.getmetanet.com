@@ -337,7 +337,7 @@
 
     <footer>
       <p>
-        This domain is used for iOS Universal Link handoff. For more details visit
+        This legacy domain now redirects handoffs to
         <a href="https://getmetanet.com" target="_blank" rel="noopener noreferrer">getmetanet.com</a>.
       </p>
     </footer>
@@ -359,9 +359,8 @@
         host = new URL(target).hostname.replace(/^www\./, '');
       } catch {}
 
-      const schemeUrl = 'metanet://browser?url=' + encodeURIComponent(target);
-      primaryCta.textContent = 'Open in Metanet Explorer';
-      primaryCta.href = schemeUrl;
+      primaryCta.textContent = 'Continue on GetMetanet';
+      primaryCta.href = 'https://getmetanet.com/open?url=' + encodeURIComponent(target);
       primaryCta.target = '_self';
 
       if (hint && hintHost) {
