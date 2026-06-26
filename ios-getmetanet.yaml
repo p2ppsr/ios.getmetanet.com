@@ -17,8 +17,8 @@ spec:
         kubernetes.io/hostname: server2
       containers:
         - name: web
-          image: ios-getmetanet-web:local
-          imagePullPolicy: Never
+          image: registry.cars-operator-system.svc.cluster.local:5000/local/ios-getmetanet-web:20260626-welcome-router-7240ebf
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           readinessProbe:
