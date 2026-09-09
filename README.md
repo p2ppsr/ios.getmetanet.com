@@ -11,7 +11,12 @@ metadata:
   name: ios-getmetanet-web
   namespace: ios-getmetanet
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: ios-getmetanet-web
@@ -20,8 +25,13 @@ spec:
       labels:
         app: ios-getmetanet-web
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: server2
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: ios-getmetanet-web
       containers:
         - name: web
           image: ios-getmetanet-web:local
@@ -30,16 +40,27 @@ spec:
             - containerPort: 8080
           readinessProbe:
             httpGet:
-              path: /
+              path: /apple-app-site-association
               port: 8080
             initialDelaySeconds: 2
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /
+              path: /apple-app-site-association
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 20
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ios-getmetanet-web
+  namespace: ios-getmetanet
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: ios-getmetanet-web
 ---
 apiVersion: v1
 kind: Service
